@@ -95,9 +95,9 @@ JIRA {
    | (~no markupWord<empty>)+ -- type2
 
   markupWord<excl>
-   = "[" markupWordUntil<"|", excl>? space* uri space* "]" -- link
+   = "[~" (~"]" ident)+ "]" -- user
+   | "[" markupWordUntil<"|", excl>? space* uri space* "]" -- link
    | "[" markupWordUntil<"|", excl>? "^" space* urichars space* "]" -- attachment
-   | "[~" (~"]" ident)+ "]" -- user
    | "!" (~"!" filechar)+ ("|" (~"!" ident)+)? "!"  -- embed
    | "{color" options? "}" markupWordUntil<"{color}", excl> -- color
    | "{{" markupWordUntil<"}}", excl> -- monospace
